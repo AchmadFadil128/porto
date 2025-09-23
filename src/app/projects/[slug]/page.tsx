@@ -7,11 +7,23 @@ export default function ProjectDetailPage({ params }) {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const [slug, setSlug] = useState(null);
+
+  useEffect(() => {
+    const unwrapParams = async () => {
+      const unwrappedParams = await params;
+      setSlug(unwrappedParams.slug);
+    };
+    
+    unwrapParams();
+  }, [params]);
 
   useEffect(() => {
     const fetchProject = async () => {
+      if (!slug) return;
+      
       try {
-        const response = await fetch(`/api/projects/${params.slug}`);
+        const response = await fetch(`/api/projects/${slug}`);
         const data = await response.json();
         if (data.error) {
           router.push('/404');
@@ -26,10 +38,10 @@ export default function ProjectDetailPage({ params }) {
       }
     };
 
-    if (params.slug) {
+    if (slug) {
       fetchProject();
     }
-  }, [params.slug, router]);
+  }, [slug, router]);
 
   if (loading) {
     return (

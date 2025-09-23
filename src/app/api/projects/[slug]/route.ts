@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { projects } from '@/data/projects';
 
 export async function GET(request, { params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const project = projects.find(p => p.slug === slug);
   
   if (!project) {
