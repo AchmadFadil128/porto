@@ -61,9 +61,22 @@ export default function ProjectsPage() {
             href={`/projects/${project.slug}`}
             className="bg-white rounded-xl shadow-md border border-blue-100 overflow-hidden hover:shadow-lg transition duration-300"
           >
-            <div className="bg-gray-200 border-2 border-dashed w-full h-48 flex items-center justify-center text-gray-500">
-              Project Image
-            </div>
+            {project.image_url ? (
+              <img 
+                src={`http://localhost:3001${project.image_url}`} 
+                alt={project.title}
+                className="w-full h-48 object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = '/placeholder-image.svg'; // fallback image
+                }}
+              />
+            ) : (
+              <div className="bg-gray-200 border-2 border-dashed w-full h-48 flex items-center justify-center text-gray-500">
+                No Image
+              </div>
+            )}
             <div className="p-6">
               <h2 className="text-xl font-bold text-blue-800 mb-2">{project.title}</h2>
               <p className="text-blue-900">{project.short_description}</p>

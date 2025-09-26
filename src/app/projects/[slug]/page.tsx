@@ -84,9 +84,22 @@ export default function ProjectDetailPage({ params }) {
       
       <h1 className="text-3xl font-bold text-blue-800 mb-6">{project.title}</h1>
       
-      <div className="bg-gray-200 border-2 border-dashed w-full h-96 flex items-center justify-center text-gray-500 mb-8">
-        Main Project Image
-      </div>
+      {project.image_url ? (
+        <img 
+          src={`http://localhost:3001${project.image_url}`} 
+          alt={project.title}
+          className="w-full h-96 object-cover mb-8 rounded-lg"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = '/placeholder-image.svg'; // fallback image
+          }}
+        />
+      ) : (
+        <div className="bg-gray-200 border-2 border-dashed w-full h-96 flex items-center justify-center text-gray-500 mb-8 rounded-lg">
+          No Main Image
+        </div>
+      )}
       
       <div className="prose max-w-none text-blue-900 mb-8">
         <p>{project.description}</p>
@@ -113,11 +126,24 @@ export default function ProjectDetailPage({ params }) {
       
       <h2 className="text-2xl font-bold text-blue-800 mb-6">Screenshots</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {project.screenshots.map((screenshot, index) => (
-          <div key={index} className="bg-gray-200 border-2 border-dashed w-full h-64 flex items-center justify-center text-gray-500">
-            Screenshot {index + 1}
-          </div>
-        ))}
+        {project.screenshots && project.screenshots.length > 0 ? (
+          project.screenshots.map((screenshot, index) => (
+            <div key={index} className="overflow-hidden rounded-lg">
+              <img 
+                src={`http://localhost:3001${screenshot}`} 
+                alt={`Screenshot ${index + 1}`}
+                className="w-full h-64 object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = '/placeholder-screenshot.svg'; // fallback image
+                }}
+              />
+            </div>
+          ))
+        ) : (
+          <p className="text-blue-900 col-span-full">No screenshots available for this project.</p>
+        )}
       </div>
     </div>
   );
