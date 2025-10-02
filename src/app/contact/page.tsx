@@ -52,20 +52,20 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white pt-32 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-white dark:bg-dark-bg pt-32 pb-20 relative overflow-hidden">
       {/* Subtle background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-40 right-20 w-96 h-96 bg-blue-50 rounded-full opacity-40 blur-3xl"></div>
-        <div className="absolute bottom-40 left-20 w-96 h-96 bg-blue-50 rounded-full opacity-30 blur-3xl"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-40 blur-3xl"></div>
+        <div className="absolute bottom-40 left-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-30 blur-3xl"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-dark-text-primary mb-6">
             Get In Touch
           </h1>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-dark-text-secondary leading-relaxed">
             I'm currently available for freelance work and open to new opportunities. Let's create something amazing together!
           </p>
         </div>
@@ -74,8 +74,8 @@ export default function ContactPage() {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Information</h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-dark-text-primary mb-6">Contact Information</h2>
+              <p className="text-gray-600 dark:text-dark-text-secondary text-lg leading-relaxed">
                 Feel free to reach out if you'd like to collaborate on a project or just want to connect!
               </p>
             </div>
@@ -86,17 +86,17 @@ export default function ContactPage() {
                 return (
                   <div 
                     key={index} 
-                    className="group backdrop-blur-md bg-white/70 border border-gray-200/50 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    className="group backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     <div className="flex items-center gap-4">
                       <div className={`p-3 bg-gradient-to-br ${method.color} rounded-xl shadow-lg`}>
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">
+                        <h3 className="font-bold text-gray-900 dark:text-dark-text-primary text-lg group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                           {method.name}
                         </h3>
-                        <p className="text-gray-600">{method.value}</p>
+                        <p className="text-gray-600 dark:text-dark-text-secondary">{method.value}</p>
                       </div>
                     </div>
                   </div>
@@ -107,10 +107,10 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Me a Message</h2>
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200/50 rounded-3xl shadow-lg p-8 space-y-6">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-dark-text-primary mb-6">Send Me a Message</h2>
+            <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl shadow-lg p-8 space-y-6">
               <div>
-                <label htmlFor="name" className="block text-gray-900 font-semibold mb-2">
+                <label htmlFor="name" className="block text-gray-900 dark:text-dark-text-primary font-semibold mb-2">
                   Name
                 </label>
                 <input
@@ -118,13 +118,13 @@ export default function ContactPage() {
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                  className="w-full px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-gray-200 dark:border-dark-bg/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300 text-gray-900 dark:text-dark-text-primary"
                   placeholder="Your name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-gray-900 font-semibold mb-2">
+                <label htmlFor="email" className="block text-gray-900 dark:text-dark-text-primary font-semibold mb-2">
                   Email
                 </label>
                 <input
@@ -132,13 +132,13 @@ export default function ContactPage() {
                   id="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                  className="w-full px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-gray-200 dark:border-dark-bg/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300 text-gray-900 dark:text-dark-text-primary"
                   placeholder="your.email@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-gray-900 font-semibold mb-2">
+                <label htmlFor="subject" className="block text-gray-900 dark:text-dark-text-primary font-semibold mb-2">
                   Subject
                 </label>
                 <input
@@ -146,13 +146,13 @@ export default function ContactPage() {
                   id="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                  className="w-full px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-gray-200 dark:border-dark-bg/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300 text-gray-900 dark:text-dark-text-primary"
                   placeholder="What's this regarding?"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-gray-900 font-semibold mb-2">
+                <label htmlFor="message" className="block text-gray-900 dark:text-dark-text-primary font-semibold mb-2">
                   Message
                 </label>
                 <textarea
@@ -160,7 +160,7 @@ export default function ContactPage() {
                   rows={6}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none text-gray-900"
+                  className="w-full px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-gray-200 dark:border-dark-bg/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300 resize-none text-gray-900 dark:text-dark-text-primary"
                   placeholder="Your message here..."
                 ></textarea>
               </div>

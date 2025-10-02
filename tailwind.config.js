@@ -4,6 +4,7 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}"
   ],
+  darkMode: 'class', // Enable dark mode using class strategy
   theme: {
     extend: {
       colors: {
@@ -18,7 +19,16 @@ module.exports = {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
-        }
+        },
+        // Dark mode specific colors
+        'dark-bg': {
+          DEFAULT: '#0F172A',
+          secondary: '#1E293B',
+        },
+        'dark-text': {
+          primary: '#F1F5F9',
+          secondary: '#94A3B8',
+        },
       }
     },
   },
