@@ -5,11 +5,13 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X, Code2 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Navigation() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -38,12 +40,12 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="group flex items-center space-x-3">
             <div className="relative">
-              <div className="bg-gradient-to-br from-blue-600 to-blue-500 p-2.5 rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300">
-                <Code2 className="w-6 h-6 text-white" />
+              <div className="rounded-xl transition-all duration-300">
+                <img src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} alt="profile" className="w-10 h-10 text-white rounded-xl" />
               </div>
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-dark-text-primary group-hover:text-blue-600 transition-colors duration-300">
-              Portfolio
+              Achmad Fadil
             </span>
           </Link>
 
@@ -74,14 +76,6 @@ export default function Navigation() {
 
           {/* CTA Button and Theme Toggle for mobile */}
           <div className="flex items-center space-x-2">
-            <div className="hidden md:block">
-              <Link
-                href="/contact"
-                className="group px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-semibold text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                Let's Talk
-              </Link>
-            </div>
             
             {/* Theme Toggle for desktop */}
             <div className="hidden md:block">

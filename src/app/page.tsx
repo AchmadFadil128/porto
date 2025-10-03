@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, Code, Palette, Settings } from 'lucide-react';
 
@@ -37,11 +38,9 @@ export default function Home() {
             <div className="lg:w-1/3 flex flex-col items-center lg:items-center space-y-8">
               <div className="relative group flex justify-center">
                 {/* Glass effect profile container */}
-                <div className="relative backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500">
-                  <div className="w-48 h-48 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                    <div className="text-5xl font-bold text-white">
-                    DEV
-                  </div>
+                <div className="relative backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500">
+                  <div className="w-56 h-56 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                    <img src="/Profile.png" alt="profile" className="w-full h-full object-cover rounded-2xl" />
                 </div>
               </div>
             </div>
@@ -74,21 +73,23 @@ export default function Home() {
               </h1>
               
               <p className="text-xl text-gray-600 dark:text-dark-text-secondary leading-relaxed max-w-2xl">
-                Welcome to my digital universe! I craft beautiful, functional web applications 
-                using cutting-edge technologies. Let's build something extraordinary together.
+              Welcome to my world! I create microservices applications and also ensure that applications run smoothly through scaling. I also have an interest in writing and video editing.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
+                <Link href="/projects">
                 <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                   <span className="flex items-center justify-center">
                     View My Projects
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </button>
-                
+                </Link>
+                <Link href="/contact">
                 <button className="px-8 py-4 backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-2xl font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
                   Let's Connect
                 </button>
+                </Link>
               </div>
             </div>
           </div>
