@@ -128,7 +128,7 @@ export default function Navigation() {
             </Link>
             
             {/* Mobile Theme Toggle */}
-            <div className="px-5 py-3">
+            <div className="px-5 py-3 flex justify-center">
               <ThemeToggle />
             </div>
           </div>

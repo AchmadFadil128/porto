@@ -30,7 +30,7 @@ export default function Home() {
         <div className="absolute bottom-40 left-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-30 blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 lg:px-12 py-20">
+      <div className="relative z-10 container mx-auto px-6 lg:px-12 pt-28 lg:pt-20 pb-20">
         {/* Hero Section */}
         <div className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-24 min-h-[85vh] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
 
@@ -39,7 +39,7 @@ export default function Home() {
               <div className="relative group flex justify-center">
                 {/* Glass effect profile container */}
                 <div className="relative backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500">
-                  <div className="w-56 h-56 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                  <div className="w-40 h-40 lg:w-56 lg:h-56 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
                     <img src="/Profile.png" alt="profile" className="w-full h-full object-cover rounded-2xl" />
                 </div>
               </div>
