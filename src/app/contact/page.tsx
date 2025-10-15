@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, Github, Linkedin, Twitter, Send } from 'lucide-react';
+import { Mail, Github, Linkedin, Youtube, Send } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -27,26 +27,26 @@ export default function ContactPage() {
   const contactMethods = [
     {
       name: "Email",
-      value: "hello@example.com",
+      value: "me@achmad128.my.id",
       icon: Mail,
       color: "from-blue-500 to-blue-600"
     },
     {
       name: "GitHub",
-      value: "github.com/username",
+      value: "github.com/AchmadFadil128",
       icon: Github,
       color: "from-gray-700 to-gray-800"
     },
     {
       name: "LinkedIn",
-      value: "linkedin.com/in/username",
+      value: "linkedin.com/in/achmad-fadil-nur-ramdhani",
       icon: Linkedin,
       color: "from-blue-600 to-blue-700"
     },
     {
-      name: "Twitter",
-      value: "@username",
-      icon: Twitter,
+      name: "Youtube",
+      value: "@achmad-128",
+      icon: Youtube,
       color: "from-blue-400 to-blue-500"
     }
   ];
@@ -105,7 +105,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Contact Form
           <div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-dark-text-primary mb-6">Send Me a Message</h2>
             <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl shadow-lg p-8 space-y-6">
@@ -173,7 +173,7 @@ export default function ContactPage() {
                 Send Message
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

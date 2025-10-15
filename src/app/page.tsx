@@ -11,6 +11,17 @@ export default function Home() {
   const [loadingRecent, setLoadingRecent] = useState<boolean>(true);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [currentRole, setCurrentRole] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+  
+  // List of roles to cycle through
+  const roles = [
+    "DevOps Engineer",
+    "AIOps Engineer",
+    "Automation Engineer"
+  ];
   
   // Create duplicated projects array for infinite scrolling
   const duplicatedProjects = recentProjects.length > 0 
@@ -24,6 +35,36 @@ export default function Home() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  // Typing effect for roles
+  useEffect(() => {
+    const handleTyping = () => {
+      const currentRoleText = roles[currentRole];
+      
+      if (isDeleting) {
+        // Delete text
+        setCurrentText(currentRoleText.substring(0, currentText.length - 1));
+        setTypingSpeed(100);
+        
+        if (currentText === '') {
+          setIsDeleting(false);
+          setCurrentRole((prev) => (prev + 1) % roles.length);
+        }
+      } else {
+        // Type text
+        setCurrentText(currentRoleText.substring(0, currentText.length + 1));
+        setTypingSpeed(100);
+        
+        if (currentText === currentRoleText) {
+          // Pause at the end of typing
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      }
+    };
+
+    const typingTimer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(typingTimer);
+  }, [currentText, isDeleting, currentRole, roles]);
 
   useEffect(() => {
     const fetchRecent = async () => {
@@ -56,15 +97,12 @@ export default function Home() {
       const { scrollLeft, scrollWidth, clientWidth } = container;
       const originalProjectsWidth = (scrollWidth / 2); // Since we duplicated the projects
       
-      // When we're past the first set of original projects, reset to the beginning
       if (scrollLeft >= originalProjectsWidth) {
-        // Reset to start of the original projects without animation for seamless loop
         container.scrollTo({
           left: 0,
           behavior: 'auto'
         });
       } else {
-        // Otherwise, scroll by a specific amount
         container.scrollBy({
           left: 250, // Scroll by a fixed amount
           behavior: 'smooth'
@@ -107,9 +145,9 @@ export default function Home() {
   };
 
   const skills = [
-    { icon: Code, title: "Web Development", description: "Creating responsive and interactive websites using modern frameworks like React and Next.js." },
-    { icon: Palette, title: "UI/UX Design", description: "Designing intuitive user interfaces with a focus on user experience and accessibility." },
-    { icon: Settings, title: "API Integration", description: "Building and integrating with RESTful APIs to create dynamic web applications." }
+    { icon: Code, title: "DevOps Engineer", description: "Integrates Development (Dev) and Operations (Ops) to accelerate the delivery of reliable, high-quality software through CI/CD automation." },
+    { icon: Palette, title: "AIOps Engineer", description: "Applies Artificial Intelligence (AI) and Machine Learning to operational data to detect anomalies, predict incidents, and automate system responses." },
+    { icon: Settings, title: "Automation Integration", description: "Designs and implements automated integration solutions to connect various systems and services, ensuring seamless and efficient data workflows." }
   ];
 
   return (
@@ -138,13 +176,13 @@ export default function Home() {
             {/* Social Links with glass effect */}
             <div className="w-full text-center lg:justify-start">
               <div className="inline-flex space-x-4">
-                <a href="#" className="group p-4 backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 hover:bg-blue-50/80 dark:hover:bg-dark-bg/80 rounded-2xl transition-all duration-300 hover:shadow-lg">
+                <a href="https://github.com/AchmadFadil128" className="group p-4 backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 hover:bg-blue-50/80 dark:hover:bg-dark-bg/80 rounded-2xl transition-all duration-300 hover:shadow-lg">
                   <Github className="w-6 h-6 text-gray-600 dark:text-dark-text-secondary group-hover:text-blue-600 transition-colors" />
                 </a>
-                <a href="#" className="group p-4 backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 hover:bg-blue-50/80 dark:hover:bg-dark-bg/80 rounded-2xl transition-all duration-300 hover:shadow-lg">
+                <a href="https://www.linkedin.com/in/achmad-fadil-nur-ramdhani/" className="group p-4 backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 hover:bg-blue-50/80 dark:hover:bg-dark-bg/80 rounded-2xl transition-all duration-300 hover:shadow-lg">
                   <Linkedin className="w-6 h-6 text-gray-600 dark:text-dark-text-secondary group-hover:text-blue-600 transition-colors" />
                 </a>
-                <a href="#" className="group p-4 backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 hover:bg-blue-50/80 dark:hover:bg-dark-bg/80 rounded-2xl transition-all duration-300 hover:shadow-lg">
+                <a href="mailto:me@achmad128.my.id" className="group p-4 backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 hover:bg-blue-50/80 dark:hover:bg-dark-bg/80 rounded-2xl transition-all duration-300 hover:shadow-lg">
                   <Mail className="w-6 h-6 text-gray-600 dark:text-dark-text-secondary group-hover:text-blue-600 transition-colors" />
                 </a>
               </div>
@@ -154,16 +192,17 @@ export default function Home() {
           {/* Content Section */}
           <div className="lg:w-3/5 text-center lg:text-left space-y-8">
             <div className="space-y-6">
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-gray-900 dark:text-dark-text-primary">
+              <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-dark-text-primary">
                 Hello, I'm a
                 <br />
                 <span className="bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">
-                  DevOps Engineer
+                  {currentText}
+                  <span className="ml-1 animate-ping">|</span>
                 </span>
               </h1>
 
               <p className="text-xl text-gray-600 dark:text-dark-text-secondary leading-relaxed max-w-2xl">
-                Welcome to my world! I create microservices applications and also ensure that applications run smoothly through scaling. I also have an interest in writing and video editing.
+                Welcome to Achmad world! I create microservices applications and also ensure that applications run smoothly through scaling. I also have an interest in writing and video editing.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
@@ -262,7 +301,7 @@ export default function Home() {
                   <div className="py-6">
                     <div
                       ref={carouselRef}
-                      className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth"
+                      className="flex gap-6 overflow-x-auto overflow-y-visible snap-x snap-mandatory scroll-smooth px-6"
                       style={{
                         scrollbarWidth: 'none',
                         msOverflowStyle: 'none',
@@ -280,7 +319,7 @@ export default function Home() {
                         <Link
                           key={`${project.id}-${index}`}
                           href={`/projects/${project.slug}`}
-                          className="group snap-start flex-shrink-0 w-[85%] sm:w-[60%] md:w-[48%] lg:w-[32%] backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
+                          className="group relative hover:z-10 snap-start flex-shrink-0 w-[85%] sm:w-[60%] md:w-[48%] lg:w-[32%] backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                         >
                           <div className="relative overflow-hidden bg-gray-100 dark:bg-dark-bg h-56">
                             {project.image_url ? (
@@ -346,9 +385,11 @@ export default function Home() {
               <p className="text-gray-600 dark:text-dark-text-secondary text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
                 Let's collaborate and bring your vision to life with innovative solutions and cutting-edge technology.
               </p>
+              <Link href="/contact">
               <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 Get In Touch
               </button>
+              </Link>
             </div>
           </div>
         </div>

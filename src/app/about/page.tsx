@@ -4,38 +4,30 @@ import { User, Briefcase, GraduationCap, Code2 } from 'lucide-react';
 
 export default function AboutPage() {
   const skills = [
-    "JavaScript (ES6+)",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
+    "Kubernetes",
+    "Docker",
+    "CI/CD",
+    "Python",
     "HTML/CSS",
     "Tailwind CSS",
     "RESTful APIs",
-    "Git & GitHub",
-    "Responsive Design"
+    "Git & GitHub"
   ];
 
   const experience = [
     {
-      role: "Frontend Developer",
-      company: "Tech Solutions Inc.",
-      period: "2022 - Present",
-      description: "Developing modern web applications using React and Next.js with a focus on performance and user experience."
+      role: "Student Intern",
+      company: "PT Indostorage Solusi Teknologi",
+      period: "2025 - Present",
+      description: "Learning about the basics of DevOps and AIOps."
     },
-    {
-      role: "Junior Web Developer",
-      company: "Digital Creations LLC",
-      period: "2020 - 2022",
-      description: "Built responsive websites for clients across various industries using HTML, CSS, and JavaScript."
-    }
   ];
 
   const education = [
     {
-      degree: "Bachelor of Science in Computer Science",
-      school: "University of Technology",
-      period: "2016 - 2020"
+      degree: "Sistem Informasi Jaringan dan Aplikasi",
+      school: "SMK Negeri 1 Cimahi",
+      period: "2022 - 2026"
     }
   ];
 
@@ -60,17 +52,16 @@ export default function AboutPage() {
         
         {/* Profile Summary Section */}
         <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl shadow-lg p-8 lg:p-12 mb-16">
-          <div className="flex flex-col md:flex-row gap-12">
+          <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Profile Picture */}
-            <div className="md:w-1/3 flex justify-center md:justify-start">
+            <div className="md:w-1/3 flex justify-center md:justify-center">
               <div className="relative group">
-                <div className="backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-6 shadow-xl">
-                  <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl w-48 h-48 flex items-center justify-center">
-                    <User className="w-24 h-24 text-white" />
-                  </div>
+                <div className="backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-6 shadow-xl w-47 h-47 lg:w-56 lg:h-56">
+                <img src="/Profile.png" alt="profile" className="w-full h-full object-cover rounded-2xl" />
                 </div>
               </div>
             </div>
+          
 
             {/* Summary Content */}
             <div className="md:w-2/3">
@@ -83,18 +74,15 @@ export default function AboutPage() {
               
               <div className="space-y-4 text-gray-600 dark:text-dark-text-secondary leading-relaxed">
                 <p>
-                  I'm a passionate frontend developer with over 4 years of experience creating modern, 
-                  responsive web applications. I specialize in React and Next.js ecosystems, with a strong 
-                  focus on delivering exceptional user experiences.
+                  I am a DevOps Engineer who has just entered the workforce. In addition, I also have a good understanding of the basics of programming languages such as PHP, JavaScript, TypeScript, and C++.
+                  
                 </p>
                 <p>
-                  My approach combines technical expertise with an eye for design, ensuring that the 
-                  applications I build are not only functional but also visually appealing and intuitive 
-                  to use.
+                  Currently, I am studying AIOps to incorporate AI into every process in the creation of services or applications.
+                  The flow I built does not rely solely on AI, but is accompanied by an efficient and neat flow.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new technologies, contributing to open 
-                  source projects, or sharing knowledge with the developer community.
+                  When I'm not working as a DevOps or AIOps engineer, I usually explore new technologies, photography, and video editing. I also manage an Instagram account, @ifusla, which highlights the correlation between hadith and our daily lives.
                 </p>
               </div>
             </div>
