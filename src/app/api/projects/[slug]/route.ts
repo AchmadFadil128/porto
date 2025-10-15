@@ -3,7 +3,8 @@ import { NextResponse } from 'next/server';
 export async function GET(request, { params }) {
   try {
     const { slug } = await params;
-    const response = await fetch(`http://localhost:3001/api/projects/${slug}`);
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(`${apiUrl}/api/projects/${slug}`);
     
     if (!response.ok) {
       if (response.status === 404) {

@@ -133,7 +133,7 @@ export default function ProjectDetailPage({ params }) {
         <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg mb-12">
           {project.image_url ? (
             <img 
-              src={`http://localhost:3001${project.image_url}`} 
+              src={`${process.env.NEXT_PUBLIC_API_URL}${project.image_url}`} 
               alt={project.title}
               className="w-full h-[32rem] object-cover"
               onError={(e) => {
@@ -192,7 +192,7 @@ export default function ProjectDetailPage({ params }) {
                   className="group backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
                 >
                   <img 
-                    src={`http://localhost:3001${screenshot}`} 
+                    src={`${process.env.NEXT_PUBLIC_API_URL}${screenshot}`} 
                     alt={`Screenshot ${index + 1}`}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                     onError={(e) => {
