@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ExternalLink, Github, Folder } from 'lucide-react';
+import { getImageSrc } from '@/utils/image';
 
 export default function ProjectDetailPage({ params }) {
   const [project, setProject] = useState(null);
@@ -106,6 +107,8 @@ export default function ProjectDetailPage({ params }) {
     );
   }
 
+  const mainImageSrc = getImageSrc(project.image_base64 ?? project.image_url);
+
   return (
     <div className="min-h-screen bg-white dark:bg-dark-bg pt-32 pb-20 relative overflow-hidden">
       {/* Subtle background decoration */}
@@ -131,9 +134,9 @@ export default function ProjectDetailPage({ params }) {
         
         {/* Main Image */}
         <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg mb-12">
-          {project.image_url ? (
+          {mainImageSrc ? (
             <img 
-              src={project.image_url} 
+              src={mainImageSrc} 
               alt={project.title}
               className="w-full h-[32rem] object-cover"
               onError={(e) => {
@@ -186,23 +189,34 @@ export default function ProjectDetailPage({ params }) {
           
           {project.screenshots && project.screenshots.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.screenshots.map((screenshot, index) => (
-                <div 
-                  key={index} 
-                  className="group backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
-                >
-                  <img 
-                    src={screenshot} 
-                    alt={`Screenshot ${index + 1}`}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.onerror = null;
-                      target.src = '/placeholder-screenshot.svg';
-                    }}
-                  />
-                </div>
-              ))}
+              {project.screenshots.map((screenshot, index) => {
+                const screenshotSrc = getImageSrc(screenshot);
+
+                return (
+                  <div 
+                    key={index} 
+                    className="group backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
+                  >
+                    {screenshotSrc ? (
+                      <img 
+                        src={screenshotSrc} 
+                        alt={`Screenshot ${index + 1}`}
+                        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = '/placeholder-screenshot.svg';
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-64 flex flex-col items-center justify-center text-gray-400 dark:text-dark-text-secondary bg-gray-50 dark:bg-dark-bg">
+                        <Folder className="w-16 h-16 mb-2" />
+                        <span className="text-sm">No Screenshot</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl shadow-lg p-16 text-center">

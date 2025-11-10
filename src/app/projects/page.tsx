@@ -3,13 +3,15 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Folder } from 'lucide-react';
+import { getImageSrc } from '@/utils/image';
 
 interface Project {
   id: string;
   slug: string;
   title: string;
   short_description: string;
-  image_url: string;
+  image_base64?: string | null;
+  image_url?: string | null;
 }
 
 export default function ProjectsPage() {
@@ -85,35 +87,37 @@ export default function ProjectsPage() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {projects.map((project) => (
-            <Link
-              key={project.id}
-              href={`/projects/${project.slug}`}
-              className="group backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
-            >
-              {/* Image Container */}
-              <div className="relative overflow-hidden bg-gray-100 dark:bg-dark-bg h-56">
-                {project.image_url ? (
-                  <>
-                    <img
-                      src={project.image_url}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = '/placeholder-image.svg';
-                      }}
-                    />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  </>
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 dark:text-dark-text-secondary">
-                    <Folder className="w-16 h-16 mb-2" />
-                    <span className="text-sm">No Image</span>
-                  </div>
-                )}
+          {projects.map((project) => {
+            const imageSrc = getImageSrc(project.image_base64 ?? project.image_url);
+            return (
+              <Link
+                key={project.id}
+                href={`/projects/${project.slug}`}
+                className="group backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
+              >
+                {/* Image Container */}
+                <div className="relative overflow-hidden bg-gray-100 dark:bg-dark-bg h-56">
+                  {imageSrc ? (
+                    <>
+                      <img
+                        src={imageSrc}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = '/placeholder-image.svg';
+                        }}
+                      />
+                      {/* Overlay on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </>
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 dark:text-dark-text-secondary">
+                      <Folder className="w-16 h-16 mb-2" />
+                      <span className="text-sm">No Image</span>
+                    </div>
+                  )}
 
                 {/* Floating Arrow */}
                 <div className="absolute bottom-4 right-4 bg-white/90 dark:bg-dark-bg-secondary/90 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-500 shadow-lg">
@@ -121,20 +125,21 @@ export default function ProjectsPage() {
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-text-primary mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                  {project.title}
-                </h2>
-                <p className="text-gray-600 dark:text-dark-text-secondary leading-relaxed line-clamp-2">
-                  {project.short_description}
-                </p>
+                {/* Content */}
+                <div className="p-8">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-text-primary mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                    {project.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-dark-text-secondary leading-relaxed line-clamp-2">
+                    {project.short_description}
+                  </p>
 
-                {/* Bottom Border Animation */}
-                <div className="mt-6 h-1 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 rounded-full w-0 group-hover:w-full transition-all duration-500"></div>
-              </div>
-            </Link>
-          ))}
+                  {/* Bottom Border Animation */}
+                  <div className="mt-6 h-1 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 rounded-full w-0 group-hover:w-full transition-all duration-500"></div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

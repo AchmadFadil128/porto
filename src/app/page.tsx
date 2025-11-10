@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, Code, Palette, Settings, Folder } from 'lucide-react';
+import { getImageSrc } from '@/utils/image';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -297,7 +298,7 @@ export default function Home() {
                 </button>
 
                 {/* Carousel container with proper overflow handling */}
-                <div className="flex-1 overflow-hidden">
+                <div className="flex-1 overflow-visible">
                   <div className="py-6">
                     <div
                       ref={carouselRef}
@@ -315,17 +316,19 @@ export default function Home() {
                           display: none;
                         }
                       `}</style>
-                      {duplicatedProjects.map((project, index) => (
+                      {duplicatedProjects.map((project, index) => {
+                        const imageSrc = getImageSrc(project.image_base64 ?? project.image_url);
+                        return (
                         <Link
                           key={`${project.id}-${index}`}
                           href={`/projects/${project.slug}`}
                           className="group relative hover:z-10 snap-start flex-shrink-0 w-[85%] sm:w-[60%] md:w-[48%] lg:w-[32%] backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                         >
                           <div className="relative overflow-hidden bg-gray-100 dark:bg-dark-bg h-56">
-                            {project.image_url ? (
+                            {imageSrc ? (
                               <>
                                 <img
-                                  src={project.image_url}
+                                  src={imageSrc}
                                   alt={project.title}
                                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                   onError={(e) => {
@@ -358,7 +361,8 @@ export default function Home() {
                             <div className="mt-6 h-1 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 rounded-full w-0 group-hover:w-full transition-all duration-500"></div>
                           </div>
                         </Link>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

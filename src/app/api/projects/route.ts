@@ -10,13 +10,8 @@ export async function GET() {
     }
     
     const projects = await response.json();
-    // Format image URLs to be absolute
-    const formattedProjects = projects.map((project: any) => ({
-      ...project,
-      image_url: project.image_url ? `${getApiUrl()}${project.image_url}` : null
-    }));
     
-    return NextResponse.json(formattedProjects);
+    return NextResponse.json(projects);
   } catch (error) {
     console.error('Error fetching projects:', error);
     return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });

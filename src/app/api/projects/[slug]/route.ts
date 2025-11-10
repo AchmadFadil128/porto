@@ -13,14 +13,7 @@ export async function GET(request, { params }) {
       throw new Error(`Failed to fetch project: ${response.status} ${response.statusText}`);
     }
     
-    let project = await response.json();
-    
-    // Format image URLs to be absolute
-    project = {
-      ...project,
-      image_url: project.image_url ? `${getApiUrl()}${project.image_url}` : null,
-      screenshots: project.screenshots ? project.screenshots.map((screenshot: string) => `${getApiUrl()}${screenshot}`) : []
-    };
+    const project = await response.json();
     
     return NextResponse.json(project);
   } catch (error) {
