@@ -96,7 +96,7 @@ export default function ProjectsPage() {
                 {project.image_url ? (
                   <>
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${project.image_url}`}
+                      src={project.image_url}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       onError={(e) => {
@@ -136,21 +136,6 @@ export default function ProjectsPage() {
             </Link>
           ))}
         </div>
-
-        {/* Empty State */}
-        {projects.length === 0 && !loading && (
-          <div className="text-center py-20">
-            <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-16 max-w-2xl mx-auto shadow-lg">
-              <Folder className="w-20 h-20 text-gray-300 dark:text-dark-text-secondary mx-auto mb-6" />
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-dark-text-primary mb-4">
-                No Projects Yet
-              </h3>
-              <p className="text-gray-600 dark:text-dark-text-secondary text-lg">
-                Check back soon for exciting new projects!
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

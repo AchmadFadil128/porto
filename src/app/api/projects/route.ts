@@ -1,16 +1,22 @@
 import { NextResponse } from 'next/server';
+import { getApiUrl } from '@/config/api';
 
 export async function GET() {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const response = await fetch(`${apiUrl}/api/projects`);
+    const response = await fetch(`${getApiUrl()}/api/projects`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.status} ${response.statusText}`);
     }
     
     const projects = await response.json();
-    return NextResponse.json(projects);
+    // Format image URLs to be absolute
+    const formattedProjects = projects.map((project: any) => ({
+      ...project,
+      image_url: project.image_url ? `${getApiUrl()}${project.image_url}` : null
+    }));
+    
+    return NextResponse.json(formattedProjects);
   } catch (error) {
     console.error('Error fetching projects:', error);
     return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });
