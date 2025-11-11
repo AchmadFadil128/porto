@@ -4,8 +4,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X, Code2 } from 'lucide-react';
-import ThemeToggle from '@/components/ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
+import {
+  ThemeToggleButton3
+} from "@/components/ui/skiper-ui/skiper4";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -79,7 +81,7 @@ export default function Navigation() {
             
             {/* Theme Toggle for desktop */}
             <div className="hidden md:block">
-              <ThemeToggle />
+              <ThemeToggleButton3 className="h-8 w-8"  />
             </div>
             
             {/* Mobile menu button */}
@@ -129,7 +131,7 @@ export default function Navigation() {
             
             {/* Mobile Theme Toggle */}
             <div className="px-5 py-3 flex justify-center">
-              <ThemeToggle />
+              <ThemeToggleButton3 className="h-8 w-8"  />
             </div>
           </div>
         </div>
