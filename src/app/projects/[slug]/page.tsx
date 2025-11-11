@@ -47,7 +47,7 @@ export default function ProjectDetailPage({ params }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-dark-bg pt-32 pb-20">
+      <div className="min-h-screen pt-32 pb-20">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="animate-pulse space-y-8">
             {/* Back button skeleton */}
@@ -81,7 +81,7 @@ export default function ProjectDetailPage({ params }) {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-white dark:bg-dark-bg pt-32 pb-20 relative overflow-hidden">
+      <div className="min-h-screen pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-40 right-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-40 blur-3xl"></div>
         </div>
@@ -110,12 +110,8 @@ export default function ProjectDetailPage({ params }) {
   const mainImageSrc = getImageSrc(project.image_base64 ?? project.image_url);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark-bg pt-32 pb-20 relative overflow-hidden">
-      {/* Subtle background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-40 right-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-40 blur-3xl"></div>
-        <div className="absolute bottom-40 left-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-30 blur-3xl"></div>
-      </div>
+    <div className="min-h-screen pt-32 pb-20 relative overflow-hidden">
+
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 max-w-6xl">
         {/* Back Button */}

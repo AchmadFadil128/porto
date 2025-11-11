@@ -152,12 +152,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark-bg relative overflow-hidden">
-      {/* Subtle background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-40 blur-3xl"></div>
-        <div className="absolute bottom-40 left-20 w-96 h-96 bg-blue-50 dark:bg-dark-bg-secondary rounded-full opacity-30 blur-3xl"></div>
-      </div>
+    <div className="min-h-screen relative overflow-hidden">
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 pt-28 lg:pt-20 pb-20">
         {/* Hero Section */}
@@ -168,7 +163,7 @@ export default function Home() {
             <div className="relative group flex justify-center">
               {/* Glass effect profile container */}
               <div className="relative backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500">
-                <div className="w-40 h-40 lg:w-56 lg:h-56 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                <div className="w-40 h-40 lg:w-56 lg:h-56 rounded-2xl flex items-center justify-center">
                   <img src="/Profile.png" alt="profile" className="w-full h-full object-cover rounded-2xl" />
                 </div>
               </div>
