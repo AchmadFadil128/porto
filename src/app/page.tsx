@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, Code, Palette, Settings, Folder } from 'lucide-react';
+import GlassSurface from '@/components/GlassSurface'
+
+
 
 interface ProjectSummary {
   id: number | string;
@@ -169,11 +172,16 @@ export default function Home() {
           <div className="lg:w-1/3 flex flex-col items-center lg:items-center space-y-8">
             <div className="relative group flex justify-center">
               {/* Glass effect profile container */}
-              <div className="relative backdrop-blur-md bg-white/60 dark:bg-dark-bg-secondary/60 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <GlassSurface
+                width={280} 
+                height={280}
+                borderRadius={24}
+                className="relative rounded-3xl p-6"
+              >
                 <div className="w-40 h-40 lg:w-56 lg:h-56 rounded-2xl flex items-center justify-center">
                   <img src="/Profile.png" alt="profile" className="w-full h-full object-cover rounded-2xl" />
                 </div>
-              </div>
+              </GlassSurface>
             </div>
 
             {/* Social Links with glass effect */}
