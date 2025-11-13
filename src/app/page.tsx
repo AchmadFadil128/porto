@@ -3,12 +3,19 @@
 import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, Code, Palette, Settings, Folder } from 'lucide-react';
-import { getImageSrc } from '@/utils/image';
+
+interface ProjectSummary {
+  id: number | string;
+  slug: string;
+  title: string;
+  short_description: string;
+  image_url: string | null;
+}
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSkill, setActiveSkill] = useState(0);
-  const [recentProjects, setRecentProjects] = useState<any[]>([]);
+  const [recentProjects, setRecentProjects] = useState<ProjectSummary[]>([]);
   const [loadingRecent, setLoadingRecent] = useState<boolean>(true);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
@@ -312,7 +319,7 @@ export default function Home() {
                         }
                       `}</style>
                       {duplicatedProjects.map((project, index) => {
-                        const imageSrc = getImageSrc(project.image_base64 ?? project.image_url);
+                        const imageSrc = project.image_url ?? null;
                         return (
                         <Link
                           key={`${project.id}-${index}`}

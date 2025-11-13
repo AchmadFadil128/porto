@@ -3,10 +3,21 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ExternalLink, Github, Folder } from 'lucide-react';
-import { getImageSrc } from '@/utils/image';
+
+interface ProjectDetail {
+  id: string;
+  slug: string;
+  title: string;
+  short_description: string;
+  description?: string | null;
+  image_url: string | null;
+  live_demo_url?: string | null;
+  github_repo_url?: string | null;
+  screenshots?: string[] | null;
+}
 
 export default function ProjectDetailPage({ params }) {
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<ProjectDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [slug, setSlug] = useState(null);
@@ -107,7 +118,8 @@ export default function ProjectDetailPage({ params }) {
     );
   }
 
-  const mainImageSrc = getImageSrc(project.image_base64 ?? project.image_url);
+  const mainImageSrc = project.image_url ?? null;
+  const hasScreenshots = Array.isArray(project.screenshots) && project.screenshots.length > 0;
 
   return (
     <div className="min-h-screen pt-32 pb-20 relative overflow-hidden">
@@ -183,36 +195,25 @@ export default function ProjectDetailPage({ params }) {
         <div>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-dark-text-primary mb-8">Screenshots</h2>
           
-          {project.screenshots && project.screenshots.length > 0 ? (
+          {hasScreenshots ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.screenshots.map((screenshot, index) => {
-                const screenshotSrc = getImageSrc(screenshot);
-
-                return (
+              {project.screenshots!.map((screenshot, index) => (
                   <div 
                     key={index} 
                     className="group backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
                   >
-                    {screenshotSrc ? (
-                      <img 
-                        src={screenshotSrc} 
-                        alt={`Screenshot ${index + 1}`}
-                        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.onerror = null;
-                          target.src = '/placeholder-screenshot.svg';
-                        }}
-                      />
-                    ) : (
-                      <div className="w-full h-64 flex flex-col items-center justify-center text-gray-400 dark:text-dark-text-secondary bg-gray-50 dark:bg-dark-bg">
-                        <Folder className="w-16 h-16 mb-2" />
-                        <span className="text-sm">No Screenshot</span>
-                      </div>
-                    )}
+                    <img 
+                      src={screenshot} 
+                      alt={`Screenshot ${index + 1}`}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = '/placeholder-screenshot.svg';
+                      }}
+                    />
                   </div>
-                );
-              })}
+              ))}
             </div>
           ) : (
             <div className="backdrop-blur-md bg-white/70 dark:bg-dark-bg-secondary/70 border border-gray-200/50 dark:border-dark-bg/50 rounded-3xl shadow-lg p-16 text-center">

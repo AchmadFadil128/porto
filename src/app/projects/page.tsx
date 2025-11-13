@@ -1,17 +1,15 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Folder } from 'lucide-react';
-import { getImageSrc } from '@/utils/image';
 
 interface Project {
   id: string;
   slug: string;
   title: string;
   short_description: string;
-  image_base64?: string | null;
-  image_url?: string | null;
+  image_url: string | null;
 }
 
 export default function ProjectsPage() {
@@ -82,7 +80,7 @@ export default function ProjectsPage() {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {projects.map((project) => {
-            const imageSrc = getImageSrc(project.image_base64 ?? project.image_url);
+            const imageSrc = project.image_url ?? null;
             return (
               <Link
                 key={project.id}
