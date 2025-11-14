@@ -3,11 +3,11 @@ import './GlassSurface.css';
 
 const GlassSurface = ({
   children,
-  width = 200,
-  height = 80,
+  width = undefined,
+  height = undefined,
   borderRadius = 20,
   borderWidth = 0.07,
-  brightness = 50,
+  brightness = 40,
   opacity = 0.93,
   blur = 11,
   displace = 0,
